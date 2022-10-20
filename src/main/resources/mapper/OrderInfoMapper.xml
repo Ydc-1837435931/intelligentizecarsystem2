@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydcelad.intelligentizecarsystem.mapper.OrderInfoMapper">
+    <resultMap type="com.ydcelad.intelligentizecarsystem.entity.OrderInfo" id="orderinfoResult">
+        <id property="orderid"    column="orderid"    />
+        <result property="platenumber"    column="platenumber"    />
+        <result property="platepay"    column="platepay"    />
+        <result property="platetime"    column="platetime"    />
+        <result property="plateintime"    column="plateintime"    />
+        <result property="plateoutime"    column="plateoutime"    />
+        <result property="platepaytype"    column="platepaytype"    />
+    </resultMap>
+
+    <sql id="selectOrderInfo">
+        select orderid, platenumber, platepay, platetime, plateintime, plateoutime, platepaytype from orderinfo
+    </sql>
+
+    <select id="getList" resultType="com.ydcelad.intelligentizecarsystem.entity.OrderInfo">
+        <include refid="selectOrderInfo"/>
+        <if test="orderid != null  and orderid != ''"> and orderid = #{orderid}</if>
+        <if test="platenumber != null  and platenumber != ''"> and platenumber = #{platenumber}</if>
+        <if test="platepay != null  and platepay != ''"> and platepay = #{platepay}</if>
+        <if test="platetime != null  and platetime != ''"> and platetime = #{platetime}</if>
+        <if test="plateintime != null  and plateintime != ''"> and plateintime = #{plateintime}</if>
+        <if test="plateoutime != null  and plateoutime != ''"> and plateoutime = #{plateoutime}</if>
+        <if test="platepaytype != null  and platepaytype != ''"> and platepaytype = #{platepaytype}</if>
+    </select>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydcelad.intelligentizecarsystem.mapper.MerchantslistInfoMappper">
+    <resultMap id="FileMerchant" type="com.ydcelad.intelligentizecarsystem.entity.FireMerchant">
+        <id property="merchantno" column="merchantno"></id>
+        <result property="merchantName" column="merchantName"></result>
+        <result property="type" column="type"></result>
+        <result property="projectid" column="projectid"></result>
+        <result property="projectname" column="plazaname"></result>
+        <result property="area" column="area"></result>
+        <result property="plantime1" column="plantime1"></result>
+        <result property="plantime2" column="plantime2"></result>
+        <result property="plantime3" column="plantime3"></result>
+        <result property="time1" column="time1"></result>
+        <result property="time2" column="time2"></result>
+        <result property="time3" column="time3"></result>
+    </resultMap>
+    <resultMap id="project" type="com.ydcelad.intelligentizecarsystem.entity.FireMerchant">
+        <id property="projectid" column="_id"></id>
+        <result property="projectname" column="plazaname"></result>
+    </resultMap>
+
+    <sql id="seletmerchantsVo">
+        select a.*,b.plazaname from fire_merchant a LEFT JOIN fire_project b ON a.projectid = b._id
+    </sql>
+
+    <insert id="addmercharts" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireMerchant">
+        insert into fire_merchant (merchantName,type,area,plantime1,plantime2,plantime3,time1,time2,time3,projectid)
+        values  (#{merchantName},#{type},#{area},#{plantime1},#{plantime2},#{plantime3},#{time1},#{time2},#{time3},#{projectid})
+    </insert>
+
+    <select id="selectmerchantslist" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireMerchant" resultMap="FileMerchant">
+        <include refid="seletmerchantsVo"/>
+        <where>
+            <if test="merchantName != null">merchantName = #{merchantName}</if>
+        <if test="merchantno != null">merchantno = #{merchantno}</if>
+        <if test="type != null"> and type = #{type}</if>
+        <if test="area != null">and area = #{area}</if>
+        <if test="plantime1 != null">and plantime1 = #{plantime1}</if>
+        <if test="plantime2 != null">and plantime2 = #{plantime2}</if>
+        <if test="plantime3 != null">and plantime3 = #{plantime3}</if>
+        <if test="time1 != null">and time1 = #{time1}</if>
+        <if test="time2 != null">and time2 = #{time2}</if>
+        <if test="time3 != null">and time3 = #{time3}</if>
+    </where>
+    </select>
+
+    <delete id="delmerchant" parameterType="Integer">
+        delete from fire_merchant where merchantNo = #{id}
+    </delete>
+
+    <select id="getProjectList" resultMap="project">
+        SELECT _id,plazaname FROM fire_project
+    </select>
+
+    <select id="getMerchartsByid" resultMap="FileMerchant" parameterType="integer">
+        SELECT * FROM fire_merchant where merchantNo = #{id}
+    </select>
+
+    <select id="getqueryList" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireMerchant" resultMap="FileMerchant">
+        <include refid="seletmerchantsVo"/>
+        <where>
+            <if test="projectid != null">projectid = #{projectid}</if>
+            <if test="type != null"> and type = #{type}</if>
+        </where>
+    </select>
+
+    <update id="updateFormSubm" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireMerchant">
+        update fire_merchant
+        <set>
+            <if test="plantime1 != null"> plantime1 = #{plantime1},</if>
+            <if test="plantime2 != null"> plantime2 = #{plantime2},</if>
+            <if test="plantime3 != null"> plantime3 = #{plantime3},</if>
+            <if test="time1 != null"> time1 = #{time1},</if>
+            <if test="time2 != null"> time2 = #{time2},</if>
+            <if test="time3 != null"> time3 = #{time3}</if>
+        </set>
+        where merchantNo = #{merchantno}
+    </update>
+
+</mapper>

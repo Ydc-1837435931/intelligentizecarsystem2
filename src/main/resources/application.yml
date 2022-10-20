@@ -1,0 +1,33 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/intelcar?serverTimezone=GMT%2b8
+    username: root
+    password: 123456
+#    url: jdbc:mysql://localhost:3306/intelcar?serverTimezone=GMT%2b8
+#    username: ydc
+#    password: FJNHR3S7r4J7hndc
+
+
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+files:
+  upload:
+    path: D:/elad/files/
+
+

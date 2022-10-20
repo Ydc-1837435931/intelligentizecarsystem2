@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydcelad.intelligentizecarsystem.mapper.FileMapper">
+    <resultMap id="Files" type="com.ydcelad.intelligentizecarsystem.entity.Files">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="type" column="type"></result>
+        <result property="size" column="size"></result>
+        <result property="url" column="url"></result>
+        <result property="md5" column="md5"></result>
+        <result property="isDelete" column="is_delete"></result>
+        <result property="enable" column="enable"></result>
+    </resultMap>
+
+    <insert id="save" parameterType="com.ydcelad.intelligentizecarsystem.entity.Files">
+        insert into sys_file(
+        <if test="id != null or id != ''">id,</if>
+        <if test="name != null or name != ''">name,</if>
+        <if test="type != null or type != ''">type,</if>
+        <if test="size != null or size != ''">size,</if>
+        <if test="url != null or url != ''">url,</if>
+        <if test="md5 != null or md5 != ''">md5,</if>
+        <if test="isDelete != null or isDelete != ''">is_delete,</if>
+        <if test="enable != null or enable != ''">enable</if>
+        )values (
+        <if test="id != null or id != ''">#{id},</if>
+        <if test="name != null or name != ''">#{name},</if>
+        <if test="type != null or type != ''">#{type},</if>
+        <if test="size != null or size != ''">#{size},</if>
+        <if test="url != null or url != ''">#{url},</if>
+        <if test="md5 != null or md5 != ''">#{md5},</if>
+        <if test="isDelete != null or isDelete != ''">#{isDelete},</if>
+        <if test="enable != null or enable != ''">#{enable}</if>
+        )
+    </insert>
+
+    <update id="delFile" parameterType="INTEGER">
+        update sys_file set is_delete = 1 where id = #{id}
+    </update>
+
+    <select id="selectMd5" resultType="com.ydcelad.intelligentizecarsystem.entity.Files" parameterType="string">
+        select * from sys_file where md5 = #{md5}
+    </select>
+    <select id="getlist" resultMap="Files" parameterType="com.ydcelad.intelligentizecarsystem.entity.Files">
+        select * from sys_file
+        <where>
+            <if test="name!=null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="type!=null and type!=''">
+                and type=#{type}
+            </if>
+            <if test="size!=null and size!=''">
+                and size=#{size}
+            </if>
+            and is_delete = 0
+        </where>
+    </select>
+    <select id="searchByid" resultType="java.lang.Integer">
+        select count(*) from sys_file where id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydcelad.intelligentizecarsystem.mapper.FireProjectMapper">
+    <resultMap id="fireproject" type="com.ydcelad.intelligentizecarsystem.entity.FireProject">
+            <result property="id"    column="_id"    />
+            <result property="plaza"    column="Plaza"    />
+            <result property="creatdate"    column="creatdate"    />
+            <result property="domain"    column="domain"    />
+            <result property="describe1"    column="describe1"    />
+            <result property="describe2"    column="describe2"    />
+            <result property="describe3"    column="describe3"    />
+            <result property="plazaname"    column="plazaname"    />
+            <result property="zhaoshangst"    column="zhaoshangSt"    />
+            <result property="zhaoshangsj"    column="zhaoshangSj"    />
+            <result property="chutust"    column="chutuSt"    />
+            <result property="chutusj"    column="chutuSj"    />
+            <result property="xiaofangtust"    column="xiaofangtuSt"    />
+            <result property="xiaofangtusj"    column="xiaofangtuSj"    />
+            <result property="xiaofangzichast"    column="xiaofangzichaSt"    />
+            <result property="xiaofangzichasj"    column="xiaofangzichaSj"    />
+            <result property="xiaoyanst"    column="xiaoyanSt"    />
+            <result property="xiaoyansj"    column="xiaoyanSj"    />
+            <result property="kaiyejianst"  column="kaiyejianSt"  />
+            <result property="kaiyejiansj"  column="kaiyejianSj"  />
+    </resultMap>
+
+    <sql id="selectFireProjectVo">
+        select _id, Plaza, creatdate, domain, describe1, describe2, describe3, plazaname, zhaoshangSt, zhaoshangSj, chutuSt, chutuSj, xiaofangtuSt, xiaofangtuSj, xiaofangzichaSt, xiaofangzichaSj, xiaoyanSt, xiaoyanSj,kaiyejianSt,kaiyejianSj from fire_project
+    </sql>
+
+    <select id="getProjectList" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireProject" resultMap="fireproject">
+        <include refid="selectFireProjectVo"/>
+        <where>
+            <if test="plaza != null  and plaza != ''"> and Plaza = #{plaza}</if>
+            <if test="creatdate != null "> and creatdate = #{creatdate}</if>
+            <if test="domain != null  and domain != ''"> and domain = #{domain}</if>
+            <if test="describe1 != null  and describe1 != ''"> and describe1 = #{describe1}</if>
+            <if test="describe2 != null  and describe2 != ''"> and describe2 = #{describe2}</if>
+            <if test="describe3 != null  and describe3 != ''"> and describe3 = #{describe3}</if>
+            <if test="plazaname != null  and plazaname != ''"> and plazaname like concat('%', #{plazaname}, '%')</if>
+            <if test="zhaoshangst != null "> and zhaoshangSt = #{zhaoshangst}</if>
+            <if test="zhaoshangsj != null "> and zhaoshangSj = #{zhaoshangsj}</if>
+            <if test="chutust != null "> and chutuSt = #{chutust}</if>
+            <if test="chutusj != null "> and chutuSj = #{chutusj}</if>
+            <if test="xiaofangtust != null "> and xiaofangtuSt = #{xiaofangtust}</if>
+            <if test="xiaofangtusj != null "> and xiaofangtuSj = #{xiaofangtusj}</if>
+            <if test="xiaofangzichast != null "> and xiaofangzichaSt = #{xiaofangzichast}</if>
+            <if test="xiaofangzichasj != null "> and xiaofangzichaSj = #{xiaofangzichasj}</if>
+            <if test="xiaoyanst != null "> and xiaoyanSt = #{xiaoyanst}</if>
+            <if test="xiaoyansj != null "> and xiaoyanSj = #{xiaoyansj}</if>
+        </where>
+    </select>
+
+    <select id="getProjectById"  parameterType="Long" resultMap="fireproject">
+        <include refid="selectFireProjectVo"/>
+        where _id = #{Id}
+    </select>
+
+    <delete id="deleteProject" parameterType="Long">
+        delete from fire_project where _id = #{Id}
+    </delete>
+
+    <insert id="addProject" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireProject">
+        insert into fire_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="plaza != null and plaza != ''">Plaza,</if>
+            <if test="creatdate != null">creatdate,</if>
+            <if test="domain != null and domain != ''">domain,</if>
+            <if test="describe1 != null">describe1,</if>
+            <if test="describe2 != null">describe2,</if>
+            <if test="describe3 != null">describe3,</if>
+            <if test="plazaname != null and plazaname != ''">plazaname,</if>
+            <if test="zhaoshangst != null">zhaoshangSt,</if>
+            <if test="zhaoshangsj != null">zhaoshangSj,</if>
+            <if test="chutust != null">chutuSt,</if>
+            <if test="chutusj != null">chutuSj,</if>
+            <if test="xiaofangtust != null">xiaofangtuSt,</if>
+            <if test="xiaofangtusj != null">xiaofangtuSj,</if>
+            <if test="xiaofangzichast != null">xiaofangzichaSt,</if>
+            <if test="xiaofangzichasj != null">xiaofangzichaSj,</if>
+            <if test="xiaoyanst != null">xiaoyanSt,</if>
+            <if test="xiaoyansj != null">xiaoyanSj,</if>
+            <if test="kaiyejianst != null">kaiyejianSt,</if>
+            <if test="kaiyejiansj != null">kaiyejianSj,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="plaza != null and plaza != ''">#{plaza},</if>
+            <if test="creatdate != null">#{creatdate},</if>
+            <if test="domain != null and domain != ''">#{domain},</if>
+            <if test="describe1 != null">#{describe1},</if>
+            <if test="describe2 != null">#{describe2},</if>
+            <if test="describe3 != null">#{describe3},</if>
+            <if test="plazaname != null and plazaname != ''">#{plazaname},</if>
+            <if test="zhaoshangst != null">#{zhaoshangst},</if>
+            <if test="zhaoshangsj != null">#{zhaoshangsj},</if>
+            <if test="chutust != null">#{chutust},</if>
+            <if test="chutusj != null">#{chutusj},</if>
+            <if test="xiaofangtust != null">#{xiaofangtust},</if>
+            <if test="xiaofangtusj != null">#{xiaofangtusj},</if>
+            <if test="xiaofangzichast != null">#{xiaofangzichast},</if>
+            <if test="xiaofangzichasj != null">#{xiaofangzichasj},</if>
+            <if test="xiaoyanst != null">#{xiaoyanst},</if>
+            <if test="xiaoyansj != null">#{xiaoyansj},</if>
+            <if test="kaiyejianst != null">#{kaiyejianst},</if>
+            <if test="kaiyejiansj != null">#{kaiyejiansj},</if>
+        </trim>
+    </insert>
+
+    <update id="updataProject" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireProject">
+        update fire_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="plaza != null and plaza != ''">Plaza = #{plaza},</if>
+            <if test="creatdate != null">creatdate = #{creatdate},</if>
+            <if test="domain != null and domain != ''">domain = #{domain},</if>
+            <if test="describe1 != null">describe1 = #{describe1},</if>
+            <if test="describe2 != null">describe2 = #{describe2},</if>
+            <if test="describe3 != null">describe3 = #{describe3},</if>
+            <if test="plazaname != null and plazaname != ''">plazaname = #{plazaname},</if>
+            <if test="zhaoshangst != null">zhaoshangSt = #{zhaoshangst},</if>
+            <if test="zhaoshangsj != null">zhaoshangSj = #{zhaoshangsj},</if>
+            <if test="chutust != null">chutuSt = #{chutust},</if>
+            <if test="chutusj != null">chutuSj = #{chutusj},</if>
+            <if test="xiaofangtust != null">xiaofangtuSt = #{xiaofangtust},</if>
+            <if test="xiaofangtusj != null">xiaofangtuSj = #{xiaofangtusj},</if>
+            <if test="xiaofangzichast != null">xiaofangzichaSt = #{xiaofangzichast},</if>
+            <if test="xiaofangzichasj != null">xiaofangzichaSj = #{xiaofangzichasj},</if>
+            <if test="xiaoyanst != null">xiaoyanSt = #{xiaoyanst},</if>
+            <if test="xiaoyansj != null">xiaoyanSj = #{xiaoyansj},</if>
+            <if test="kaiyejianst != null">kaiyejianSt = #{kaiyejianst},</if>
+            <if test="kaiyejiansj != null">kaiyejianSj = #{kaiyejiansj},</if>
+        </trim>
+        where _id = #{id}
+    </update>
+
+</mapper>

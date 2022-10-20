@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydcelad.intelligentizecarsystem.mapper.FireOneFormMapper">
+    <resultMap id="FireOneForm" type="com.ydcelad.intelligentizecarsystem.entity.FireOneForm">
+        <id property="id" column="_id"></id>
+        <result property="questionitem" column="questionItem"></result>
+        <result property="controlmeasures" column="controlMeasures"></result>
+        <result property="responsibleunit" column="responsibleUnit"></result>
+        <result property="developmentperson" column="developmentPerson"></result>
+        <result property="businessperson" column="businessPerson"></result>
+        <result property="plandate" column="planDate"></result>
+        <result property="date" column="date"></result>
+        <result property="percentage" column="percentage"></result>
+        <result property="percenpagedescribe" column="percenpagedescribe"></result>
+        <result property="merchantsId" column="merchant_id"></result>
+        <result property="merchantName" column="merchantName"></result>
+    </resultMap>
+
+    <resultMap id="FileMerchant" type="com.ydcelad.intelligentizecarsystem.entity.FireMerchant">
+        <id property="merchantno" column="merchantno"></id>
+        <result property="merchantName" column="merchantName"></result>
+        <result property="type" column="type"></result>
+        <result property="area" column="area"></result>
+        <result property="plantime1" column="plantime1"></result>
+        <result property="plantime2" column="plantime2"></result>
+        <result property="plantime3" column="plantime3"></result>
+        <result property="time1" column="time1"></result>
+        <result property="time2" column="time2"></result>
+        <result property="time3" column="time3"></result>
+    </resultMap>
+
+    <sql id="selectFireOneForm">
+        select a.*,b.merchantName from fire_oneform a LEFT JOIN fire_merchant b ON a.merchant_id = b.merchantNo
+    </sql>
+
+    <insert id="addFireOneForm" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm">
+        insert into fire_oneform
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="questionitem != null and questionitem != ''">questionItem,</if>
+            <if test="controlmeasures != null and controlmeasures != ''">controlMeasures,</if>
+            <if test="responsibleunit != null and responsibleunit != ''">responsibleUnit,</if>
+            <if test="developmentperson != null and developmentperson != ''">developmentPerson,</if>
+            <if test="businessperson != null and businessperson != ''">businessPerson,</if>
+            <if test="plandate != null">planDate,</if>
+            <if test="date != null">date,</if>
+            <if test="merchantsId != null and merchantsId !='' ">merchant_id,</if>
+            <if test="percentage != null and percentage != ''">percentage,</if>
+            <if test="percenpagedescribe != null">percenpagedescribe,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="questionitem != null and questionitem != ''">#{questionitem},</if>
+            <if test="controlmeasures != null and controlmeasures != ''">#{controlmeasures},</if>
+            <if test="responsibleunit != null and responsibleunit != ''">#{responsibleunit},</if>
+            <if test="developmentperson != null and developmentperson != ''">#{developmentperson},</if>
+            <if test="businessperson != null and businessperson != ''">#{businessperson},</if>
+            <if test="plandate != null">#{plandate},</if>
+            <if test="date != null">#{date},</if>
+            <if test="merchantsId != null">#{merchantsId},</if>
+            <if test="percentage != null and percentage != ''">#{percentage},</if>
+            <if test="percenpagedescribe != null">#{percenpagedescribe},</if>
+        </trim>
+    </insert>
+
+    <insert id="addFireTwoForm" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm">
+        insert into fire_twoform
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="questionitem != null and questionitem != ''">questionItem,</if>
+            <if test="controlmeasures != null and controlmeasures != ''">controlMeasures,</if>
+            <if test="responsibleunit != null and responsibleunit != ''">responsibleUnit,</if>
+            <if test="developmentperson != null and developmentperson != ''">developmentPerson,</if>
+            <if test="businessperson != null and businessperson != ''">businessPerson,</if>
+            <if test="plandate != null">planDate,</if>
+            <if test="date != null">date,</if>
+            <if test="merchantsId != null and merchantsId !='' ">merchant_id,</if>
+            <if test="percentage != null and percentage != ''">percentage,</if>
+            <if test="percenpagedescribe != null">percenpagedescribe,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="questionitem != null and questionitem != ''">#{questionitem},</if>
+        <if test="controlmeasures != null and controlmeasures != ''">#{controlmeasures},</if>
+        <if test="responsibleunit != null and responsibleunit != ''">#{responsibleunit},</if>
+        <if test="developmentperson != null and developmentperson != ''">#{developmentperson},</if>
+        <if test="businessperson != null and businessperson != ''">#{businessperson},</if>
+        <if test="plandate != null">#{plandate},</if>
+        <if test="date != null">#{date},</if>
+        <if test="merchantsId != null">#{merchantsId},</if>
+        <if test="percentage != null and percentage != ''">#{percentage},</if>
+        <if test="percenpagedescribe != null">#{percenpagedescribe},</if>
+        </trim>
+    </insert>
+
+    <insert id="addFireThreeForm" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm">
+        insert into fire_threeform
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="questionitem != null and questionitem != ''">questionItem,</if>
+            <if test="controlmeasures != null and controlmeasures != ''">controlMeasures,</if>
+            <if test="responsibleunit != null and responsibleunit != ''">responsibleUnit,</if>
+            <if test="developmentperson != null and developmentperson != ''">developmentPerson,</if>
+            <if test="businessperson != null and businessperson != ''">businessPerson,</if>
+            <if test="plandate != null">planDate,</if>
+            <if test="date != null">date,</if>
+            <if test="merchantsId != null and merchantsId !='' ">merchant_id,</if>
+            <if test="percentage != null and percentage != ''">percentage,</if>
+            <if test="percenpagedescribe != null">percenpagedescribe,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="questionitem != null and questionitem != ''">#{questionitem},</if>
+        <if test="controlmeasures != null and controlmeasures != ''">#{controlmeasures},</if>
+        <if test="responsibleunit != null and responsibleunit != ''">#{responsibleunit},</if>
+        <if test="developmentperson != null and developmentperson != ''">#{developmentperson},</if>
+        <if test="businessperson != null and businessperson != ''">#{businessperson},</if>
+        <if test="plandate != null">#{plandate},</if>
+        <if test="date != null">#{date},</if>
+        <if test="merchantsId != null">#{merchantsId},</if>
+        <if test="percentage != null and percentage != ''">#{percentage},</if>
+        <if test="percenpagedescribe != null">#{percenpagedescribe},</if>
+        </trim>
+    </insert>
+
+    <delete id="delFileOneForm" parameterType="Integer">
+        delete from fire_oneform where _id = #{id}
+    </delete>
+
+    <delete id="delFileTwoForm" parameterType="Integer">
+        delete from fire_twoform where _id = #{id}
+    </delete>
+
+    <delete id="delFileThreeForm" parameterType="Integer">
+        delete from fire_threeform where _id = #{id}
+    </delete>
+
+    <select id="selectFireOneForm" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm" resultMap="FireOneForm">
+        <include refid="selectFireOneForm"/>
+        <where>
+            <if test="questionitem != null">questionItem = #{questionitem}</if>
+            <if test="controlmeasures != null"> and controlMeasures = #{controlmeasures}</if>
+            <if test="responsibleunit != null">and responsibleUnit = #{responsibleunit}</if>
+            <if test="developmentperson != null">and developmentPerson = #{developmentperson}</if>
+            <if test="businessperson != null">and businessPerson = #{businessperson}</if>
+            <if test="plandate != null">and planDate = #{plandate}</if>
+            <if test="date != null">and time1 = #{date}</if>
+            <if test="percentage != null">and time2 = #{percentage}</if>
+            <if test="percenpagedescribe != null">and time3 = #{percenpagedescribe}</if>
+        </where>
+    </select>
+
+    <select id="selectFireOneFormtable" resultMap="FireOneForm" parameterType="long">
+        select a.*,b.merchantName from fire_oneform a LEFT JOIN fire_merchant b ON a.merchant_id = b.merchantNo
+                                                    LEFT JOIN fire_project c ON  b.projectid = c._id
+                                                    <where>
+                                                        <if test="projectid != null"> c._id = #{projectid}</if>
+                                                    </where>
+    </select>
+
+    <select id="selectFireTwoFormtable" resultMap="FireOneForm" parameterType="long">
+        select a.*,b.merchantName from fire_twoform a LEFT JOIN fire_merchant b ON a.merchant_id = b.merchantNo
+                                                    LEFT JOIN fire_project c ON  b.projectid = c._id
+        <where>
+            <if test="projectid != null"> c._id = #{projectid}</if>
+        </where>
+    </select>
+
+    <select id="selectFireThreeFormtable" resultMap="FireOneForm" parameterType="long">
+        select a.*,b.merchantName from fire_threeform a LEFT JOIN fire_merchant b ON a.merchant_id = b.merchantNo
+                                                    LEFT JOIN fire_project c ON  b.projectid = c._id
+        <where>
+            <if test="projectid != null"> c._id = #{projectid}</if>
+        </where>
+    </select>
+
+    <select id="getMerchartsList" resultMap="FileMerchant">
+        SELECT merchantNo,merchantName from fire_merchant
+    </select>
+
+<!--   消防信息查询 -->
+    <select id="getFileOneFormByid" resultType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm" parameterType="long">
+        select a.*,b.merchantName from fire_oneform a LEFT JOIN fire_merchant b ON a.merchant_id = b.merchantNo where _id = #{fireid}
+    </select>
+    <select id="getFileTwoFormByid" resultType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm" parameterType="long">
+        select a.*,b.merchantName from fire_twoform a LEFT JOIN fire_merchant b ON a.merchant_id = b.merchantNo where _id = #{fireid}
+    </select>
+    <select id="getFileThreeFormByid" resultType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm" parameterType="long">
+        select a.*,b.merchantName from fire_threeform a LEFT JOIN fire_merchant b ON a.merchant_id = b.merchantNo where _id = #{fireid}
+    </select>
+
+    <update id="updatefireOneForm" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm">
+        update fire_oneform
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="questionitem != null and questionitem != ''">questionItem = #{questionitem},</if>
+            <if test="controlmeasures != null and controlmeasures != ''">controlMeasures = #{controlmeasures},</if>
+            <if test="responsibleunit != null and responsibleunit != ''">responsibleUnit = #{responsibleunit},</if>
+            <if test="developmentperson != null and developmentperson != ''">developmentPerson = #{developmentperson},</if>
+            <if test="businessperson != null and businessperson != ''">businessPerson = #{businessperson},</if>
+            <if test="plandate != null">planDate = #{plandate},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="percentage != null and percentage != ''">percentage = #{percentage},</if>
+            <if test="percenpagedescribe != null">percenpagedescribe = #{percenpagedescribe},</if>
+            <if test="merchantsId != null">merchant_id = #{merchantsId},</if>
+        </trim>
+        where _id = #{id}
+    </update>
+
+    <update id="updatefireTwoForm" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm">
+        update fire_twoform
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="questionitem != null and questionitem != ''">questionItem = #{questionitem},</if>
+            <if test="controlmeasures != null and controlmeasures != ''">controlMeasures = #{controlmeasures},</if>
+            <if test="responsibleunit != null and responsibleunit != ''">responsibleUnit = #{responsibleunit},</if>
+            <if test="developmentperson != null and developmentperson != ''">developmentPerson = #{developmentperson},</if>
+            <if test="businessperson != null and businessperson != ''">businessPerson = #{businessperson},</if>
+            <if test="plandate != null">planDate = #{plandate},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="percentage != null and percentage != ''">percentage = #{percentage},</if>
+            <if test="percenpagedescribe != null">percenpagedescribe = #{percenpagedescribe},</if>
+            <if test="merchantsId != null">merchant_id = #{merchantsId},</if>
+        </trim>
+        where _id = #{id}
+    </update>
+
+    <update id="updatefireThreeForm" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireOneForm">
+        update fire_threeform
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="questionitem != null and questionitem != ''">questionItem = #{questionitem},</if>
+            <if test="controlmeasures != null and controlmeasures != ''">controlMeasures = #{controlmeasures},</if>
+            <if test="responsibleunit != null and responsibleunit != ''">responsibleUnit = #{responsibleunit},</if>
+            <if test="developmentperson != null and developmentperson != ''">developmentPerson = #{developmentperson},</if>
+            <if test="businessperson != null and businessperson != ''">businessPerson = #{businessperson},</if>
+            <if test="plandate != null">planDate = #{plandate},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="percentage != null and percentage != ''">percentage = #{percentage},</if>
+            <if test="percenpagedescribe != null">percenpagedescribe = #{percenpagedescribe},</if>
+            <if test="merchantsId != null">merchant_id = #{merchantsId},</if>
+        </trim>
+        where _id = #{id}
+    </update>
+
+</mapper>

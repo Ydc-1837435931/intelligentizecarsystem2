@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydcelad.intelligentizecarsystem.mapper.XiaofangDataGetMapper">
+
+    <select id="getFireOneFormCount" resultType="integer">
+        SELECT COUNT(*) FROM fire_oneform
+    </select>
+
+    <select id="getFireTwoFormCount" resultType="integer">
+        SELECT COUNT(*) FROM fire_twoform
+    </select>
+
+    <select id="getFireThreeFormCount" resultType="integer">
+        SELECT COUNT(*) FROM fire_threeform
+    </select>
+
+</mapper>

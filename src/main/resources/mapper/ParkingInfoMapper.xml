@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydcelad.intelligentizecarsystem.mapper.ParkingInfoMapper">
+    <resultMap id="parkingInfo" type="com.ydcelad.intelligentizecarsystem.entity.ParkingInfo">
+        <id property="parkinid" column="parkinid"></id>
+        <result property="parkinid"    column="parkinid"    />
+        <result property="parkingname"    column="parkingname"    />
+        <result property="parkinglinkman"    column="parkinglinkman"    />
+        <result property="parkingphone"    column="parkingphone"    />
+        <result property="parkingaddress"    column="parkingaddress"    />
+        <result property="parkingencrypt"    column="parkingencrypt"    />
+        <result property="parkingweburl"    column="parkingweburl"    />
+        <result property="parkingurlport"    column="parkingurlport"    />
+        <result property="parkinginfoweburl"    column="parkinginfoweburl"    />
+        <result property="parkingremark"    column="parkingremark"    />
+        <result property="parkingwupaienable"    column="parkingwupaienable"    />
+        <result property="parkingphonepay"    column="parkingphonepay"    />
+        <result property="parkingcarpay"    column="parkingcarpay"    />
+    </resultMap>
+
+    <sql id="selectParkingInfoVo">
+        select parkinid, parkingname, parkinglinkman, parkingphone, parkingaddress, parkingencrypt, parkingweburl, parkingurlport, parkinginfoweburl, parkingremark, parkingwupaienable, parkingphonepay, parkingcarpay from parking_info
+    </sql>
+
+    <select id="selectParkingInfoList" parameterType="com.ydcelad.intelligentizecarsystem.entity.ParkingInfo" resultMap="parkingInfo">
+        <include refid="selectParkingInfoVo"/>
+        <where>
+            <if test="parkinid != null "> and parkinid = #{parkinid}</if>
+            <if test="parkingname != null  and parkingname != ''"> and parkingname like concat('%', #{parkingname}, '%')</if>
+            <if test="parkinglinkman != null  and parkinglinkman != ''"> and parkinglinkman = #{parkinglinkman}</if>
+            <if test="parkingphone != null  and parkingphone != ''"> and parkingphone = #{parkingphone}</if>
+            <if test="parkingaddress != null  and parkingaddress != ''"> and parkingaddress = #{parkingaddress}</if>
+            <if test="parkingencrypt != null  and parkingencrypt != ''"> and parkingencrypt = #{parkingencrypt}</if>
+            <if test="parkingweburl != null  and parkingweburl != ''"> and parkingweburl = #{parkingweburl}</if>
+            <if test="parkingurlport != null  and parkingurlport != ''"> and parkingurlport = #{parkingurlport}</if>
+            <if test="parkinginfoweburl != null  and parkinginfoweburl != ''"> and parkinginfoweburl = #{parkinginfoweburl}</if>
+            <if test="parkingremark != null  and parkingremark != ''"> and parkingremark = #{parkingremark}</if>
+            <if test="parkingwupaienable != null  and parkingwupaienable != ''"> and parkingwupaienable = #{parkingwupaienable}</if>
+            <if test="parkingphonepay != null  and parkingphonepay != ''"> and parkingphonepay = #{parkingphonepay}</if>
+            <if test="parkingcarpay != null  and parkingcarpay != ''"> and parkingcarpay = #{parkingcarpay}</if>
+        </where>
+    </select>
+
+    <select id="selectParkingById" resultType="com.ydcelad.intelligentizecarsystem.entity.ParkingInfo" parameterType="long">
+        <include refid="selectParkingInfoVo"/>
+        <where>
+            parkinid = #{parkinid}
+        </where>
+    </select>
+
+    <!--    <select id="selectParkingInfoById" parameterType="Long" resultMap="ParkingInfoResult">-->
+<!--        <include refid="selectParkingInfoVo"/>-->
+<!--        where parkinid = #{parkinid}-->
+<!--    </select>-->
+
+<!--    <insert id="insertParkingInfo" parameterType="ParkingInfo" useGeneratedKeys="true" keyProperty="parkinid">-->
+<!--        insert into parking_info-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="parkingname != null and parkingname != ''">parkingname,</if>-->
+<!--            <if test="parkinglinkman != null and parkinglinkman != ''">parkinglinkman,</if>-->
+<!--            <if test="parkingphone != null">parkingphone,</if>-->
+<!--            <if test="parkingaddress != null">parkingaddress,</if>-->
+<!--            <if test="parkingencrypt != null">parkingencrypt,</if>-->
+<!--            <if test="parkingweburl != null">parkingweburl,</if>-->
+<!--            <if test="parkingurlport != null">parkingurlport,</if>-->
+<!--            <if test="parkinginfoweburl != null">parkinginfoweburl,</if>-->
+<!--            <if test="parkingremark != null">parkingremark,</if>-->
+<!--            <if test="parkingwupaienable != null">parkingwupaienable,</if>-->
+<!--            <if test="parkingphonepay != null">parkingphonepay,</if>-->
+<!--            <if test="parkingcarpay != null">parkingcarpay,</if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="parkingname != null and parkingname != ''">#{parkingname},</if>-->
+<!--            <if test="parkinglinkman != null and parkinglinkman != ''">#{parkinglinkman},</if>-->
+<!--            <if test="parkingphone != null">#{parkingphone},</if>-->
+<!--            <if test="parkingaddress != null">#{parkingaddress},</if>-->
+<!--            <if test="parkingencrypt != null">#{parkingencrypt},</if>-->
+<!--            <if test="parkingweburl != null">#{parkingweburl},</if>-->
+<!--            <if test="parkingurlport != null">#{parkingurlport},</if>-->
+<!--            <if test="parkinginfoweburl != null">#{parkinginfoweburl},</if>-->
+<!--            <if test="parkingremark != null">#{parkingremark},</if>-->
+<!--            <if test="parkingwupaienable != null">#{parkingwupaienable},</if>-->
+<!--            <if test="parkingphonepay != null">#{parkingphonepay},</if>-->
+<!--            <if test="parkingcarpay != null">#{parkingcarpay},</if>-->
+<!--        </trim>-->
+<!--    </insert>-->
+
+<!--    <update id="updateParkingInfo" parameterType="ParkingInfo">-->
+<!--        update parking_info-->
+<!--        <trim prefix="SET" suffixOverrides=",">-->
+<!--            <if test="parkingname != null and parkingname != ''">parkingname = #{parkingname},</if>-->
+<!--            <if test="parkinglinkman != null and parkinglinkman != ''">parkinglinkman = #{parkinglinkman},</if>-->
+<!--            <if test="parkingphone != null">parkingphone = #{parkingphone},</if>-->
+<!--            <if test="parkingaddress != null">parkingaddress = #{parkingaddress},</if>-->
+<!--            <if test="parkingencrypt != null">parkingencrypt = #{parkingencrypt},</if>-->
+<!--            <if test="parkingweburl != null">parkingweburl = #{parkingweburl},</if>-->
+<!--            <if test="parkingurlport != null">parkingurlport = #{parkingurlport},</if>-->
+<!--            <if test="parkinginfoweburl != null">parkinginfoweburl = #{parkinginfoweburl},</if>-->
+<!--            <if test="parkingremark != null">parkingremark = #{parkingremark},</if>-->
+<!--            <if test="parkingwupaienable != null">parkingwupaienable = #{parkingwupaienable},</if>-->
+<!--            <if test="parkingphonepay != null">parkingphonepay = #{parkingphonepay},</if>-->
+<!--            <if test="parkingcarpay != null">parkingcarpay = #{parkingcarpay},</if>-->
+<!--        </trim>-->
+<!--        where parkinid = #{parkinid}-->
+<!--    </update>-->
+
+<!--    <delete id="deleteParkingInfoById" parameterType="Long">-->
+<!--        delete from parking_info where parkinid = #{parkinid}-->
+<!--    </delete>-->
+
+<!--    <delete id="deleteParkingInfoByIds" parameterType="String">-->
+<!--        delete from parking_info where parkinid in-->
+<!--        <foreach item="parkinid" collection="array" open="(" separator="," close=")">-->
+<!--            #{parkinid}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+</mapper>
