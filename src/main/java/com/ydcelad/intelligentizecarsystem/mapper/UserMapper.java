@@ -34,4 +34,6 @@ public interface UserMapper {
     Integer xclogin(FireUser fireUser);
 
     FireUser findByXcUsernamePassword(FireUser fireUser);
+
+    FireUser getXcById(String id);
 }

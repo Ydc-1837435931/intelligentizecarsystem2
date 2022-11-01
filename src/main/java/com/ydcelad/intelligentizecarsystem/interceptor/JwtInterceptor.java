@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.ydcelad.intelligentizecarsystem.common.Constants;
 import com.ydcelad.intelligentizecarsystem.config.AuthAccess;
+import com.ydcelad.intelligentizecarsystem.entity.FireUser;
 import com.ydcelad.intelligentizecarsystem.entity.User;
 import com.ydcelad.intelligentizecarsystem.exception.ServiceException;
 import com.ydcelad.intelligentizecarsystem.service.UserService;
@@ -36,7 +37,6 @@ public class JwtInterceptor implements HandlerInterceptor {
             HandlerMethod h = (HandlerMethod) handler;
             AuthAccess authAccess = h.getMethodAnnotation(AuthAccess.class);
             if(authAccess != null){
-                System.out.println("已过滤！！！！！！！！！！！！！！！！！！！！！！！！！！");
                 return true;
             }
         }
@@ -50,7 +50,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         }catch (JWTDecodeException j){
             throw new ServiceException(Constants.CODE_401,"token验证失败");
         }
-        User user = userService.getById(userId);
+        FireUser user = userService.geXcByid(userId);
         if(user == null){
             throw new ServiceException(Constants.CODE_401,"用户不存在，请重新登录");
         }
@@ -61,7 +61,6 @@ public class JwtInterceptor implements HandlerInterceptor {
         }catch (JWTVerificationException e){
             throw new ServiceException(Constants.CODE_401,"token验证失败，请重新等录呦");
         }
-
         return true;
     }
 }

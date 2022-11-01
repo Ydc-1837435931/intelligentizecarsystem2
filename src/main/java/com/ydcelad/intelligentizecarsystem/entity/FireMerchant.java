@@ -1,6 +1,7 @@
 package com.ydcelad.intelligentizecarsystem.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -14,6 +15,7 @@ import java.util.Date;
 @TableName(value = "fire_merchant")
 public class FireMerchant {
 
+    @TableId("merchantno")
     private Long merchantno;
 
     @TableField(exist = false)
@@ -23,6 +25,9 @@ public class FireMerchant {
     private String projectname;
 
     private Long type;
+
+    @TableField("merchant_type")
+    private Integer merchantType;
 
     private Double area;
 

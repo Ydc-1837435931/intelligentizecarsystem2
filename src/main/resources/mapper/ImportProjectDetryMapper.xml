@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydcelad.intelligentizecarsystem.mapper.ImportProjectDetryMapper">
+    <resultMap id="FireImportprojectdetail" type="com.ydcelad.intelligentizecarsystem.entity.FireImportprojectdetail">
+        <id property="importprojectId"    column="importproject_id"/>
+        <result property="projectId"    column="project_id"/>
+        <result property="domin"    column="domin"/>
+        <result property="detail"    column="detail"/>
+        <result property="isImport"    column="is_import"/>
+        <result property="createDate"    column="create_date"/>
+        <result property="createPerson"    column="create_person"/>
+        <result property="avaiable"    column="avaiable"/>
+        <result property="plazaname" column="plazaname" />
+    </resultMap>
+
+    <sql id="selectFireImportprojectdetailVo">
+        select i.*,p.plazaname from fire_importprojectdetail i LEFT JOIN fire_project p ON i.project_id = p._id
+    </sql>
+
+    <select id="getimportProjectDetailList" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireImportprojectdetail" resultMap="FireImportprojectdetail">
+        <include refid="selectFireImportprojectdetailVo"/>
+        <where>
+            1=1
+            <if test="projectId != null "> and project_id = #{projectId}</if>
+            <if test="domin != null  and domin != ''"> and domin like concat('%',#{domin},'%')</if>
+             and avaiable = 1
+        </where>
+    </select>
+
+    <insert id="addImportprojectdetail" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireImportprojectdetail">
+        insert into fire_importprojectdetail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">project_id,</if>
+            <if test="domin != null">domin,</if>
+            <if test="detail != null">detail,</if>
+            <if test="isImport != null">is_import,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="createPerson != null">create_person,</if>
+            <if test="avaiable != null">avaiable,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">#{projectId},</if>
+            <if test="domin != null">#{domin},</if>
+            <if test="detail != null">#{detail},</if>
+            <if test="isImport != null">#{isImport},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="createPerson != null">#{createPerson},</if>
+            <if test="avaiable != null">#{avaiable},</if>
+        </trim>
+    </insert>
+
+    <update id="delImportprojectdetail" parameterType="integer">
+        update fire_importprojectdetail set avaiable = 0 where importproject_id = #{id}
+    </update>
+
+    <select id="getImportProjectDetailById" parameterType="integer" resultMap="FireImportprojectdetail">
+        <include refid="selectFireImportprojectdetailVo"/>
+        <where>
+            1=1
+            <if test="id != null  and id != ''"> and importproject_id = #{id}</if>
+            and avaiable = 1
+        </where>
+    </select>
+
+    <update id="updateImportProjectDetail" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireImportprojectdetail">
+        update fire_importprojectdetail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="domin != null">domin = #{domin},</if>
+            <if test="detail != null">detail = #{detail},</if>
+            <if test="isImport != null">is_import = #{isImport},</if>
+            <if test="createPerson != null">create_person = #{createPerson},</if>
+        </trim>
+        where importproject_id = #{importprojectId}
+    </update>
+
+
+</mapper>

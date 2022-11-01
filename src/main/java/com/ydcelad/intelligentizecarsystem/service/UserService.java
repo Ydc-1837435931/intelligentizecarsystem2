@@ -25,4 +25,6 @@ public interface UserService  {
         User getById(String id);
 
     FireUser xclogin(FireUser fireUser);
+
+    FireUser geXcByid(String id);
 }

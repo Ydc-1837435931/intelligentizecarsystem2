@@ -2,12 +2,10 @@ package com.ydcelad.intelligentizecarsystem.controller;
 
 import com.ydcelad.intelligentizecarsystem.common.Result;
 import com.ydcelad.intelligentizecarsystem.entity.FireProject;
+import com.ydcelad.intelligentizecarsystem.entity.ProjectDetail;
 import com.ydcelad.intelligentizecarsystem.entity.XiaofangVO;
 import com.ydcelad.intelligentizecarsystem.service.IFiveCensorService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -121,4 +119,23 @@ public class fivecensorController {
         return Result.success(fireProject);
     }
 
+    @GetMapping("/controllerTest")
+    public String  ControllerTest(){
+        System.out.println("controllerTest成功！！！！！");
+        return "{\"name\" : Web测试成功}";
+    }
+
+    @PostMapping("/getProjectDetailById")
+    public Result getProjectDetailById(@RequestBody Integer projectId){
+        try{
+            ProjectDetail projectDetail = iFiveCensorService.getThreeTime(projectId);
+            projectDetail.setBishenbiyan(iFiveCensorService.getbishenbiyan(projectId));
+            projectDetail.setYaoqiuyangpingpai(iFiveCensorService.getyaoqiuyangpingpai(projectId));
+            projectDetail.setOthers(iFiveCensorService.getothers(projectId));
+            return Result.success(projectDetail);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Result.error();
+    }
 }

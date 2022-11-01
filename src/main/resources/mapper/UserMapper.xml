@@ -70,4 +70,8 @@
     <select id="getById" resultType="com.ydcelad.intelligentizecarsystem.entity.User" parameterType="string">
         select * from sys_user where id = #{id}
     </select>
+
+    <select id="getXcById" resultType="com.ydcelad.intelligentizecarsystem.entity.FireUser" parameterType="string">
+        select * from auth_user where id = #{id}
+    </select>
 </mapper>

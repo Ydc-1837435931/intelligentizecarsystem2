@@ -24,6 +24,15 @@
         <result property="kaiyejiansj"    column="kaiyejianSj"    />
     </resultMap>
 
+    <resultMap id="projectDetail" type="com.ydcelad.intelligentizecarsystem.entity.ProjectDetail">
+        <result property="plantime1" column="plantime1"/>
+        <result property="plantime2" column="plantime2"/>
+        <result property="plantime3" column="plantime3"/>
+        <result property="bishenbiyan" column="bishenbiyan"/>
+        <result property="yaoqiuyangpingpai" column="yaoqiuyangpingpai"/>
+        <result property="others" column="others"/>
+    </resultMap>
+
 
     <select id="getFireProjectHuizong" resultMap="fireproject" parameterType="integer">
         SELECT
@@ -49,4 +58,19 @@
     <select id="getProjectTime" parameterType="integer" resultMap="fireproject">
         SELECT * FROM fire_project where _id = #{projectId}
     </select>
+
+    <select id="getThreeTime" parameterType="integer" resultMap="projectDetail">
+        SELECT MIN(plantime1) AS plantime1,MIN(plantime2) AS plantime2,MIN(plantime3) AS plantime3
+        FROM fire_merchant WHERE projectid = #{projectId}
+    </select>
+    <select id="getbishenbiyan" parameterType="integer" resultType="integer">
+        SELECT count(*) FROM fire_merchant WHERE merchanttype = 1 AND projectid = #{projectId}
+    </select>
+    <select id="getyaoqiuyangpingpai" parameterType="integer" resultType="integer">
+        SELECT count(*) FROM fire_merchant WHERE merchanttype = 2 AND projectid = #{projectId}
+    </select>
+    <select id="getothers" parameterType="integer" resultType="integer">
+        SELECT count(*) FROM fire_merchant WHERE merchanttype = 3 AND projectid = #{projectId}
+    </select>
+
 </mapper>

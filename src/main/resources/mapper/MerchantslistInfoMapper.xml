@@ -5,6 +5,7 @@
         <id property="merchantno" column="merchantno"></id>
         <result property="merchantName" column="merchantName"></result>
         <result property="type" column="type"></result>
+        <result property="merchantType" column="merchanttype"></result>
         <result property="projectid" column="projectid"></result>
         <result property="projectname" column="plazaname"></result>
         <result property="area" column="area"></result>
@@ -20,13 +21,36 @@
         <result property="projectname" column="plazaname"></result>
     </resultMap>
 
+    <resultMap id="fireproject" type="com.ydcelad.intelligentizecarsystem.entity.FireProject">
+        <result property="id"    column="_id"    />
+        <result property="plaza"    column="Plaza"    />
+        <result property="creatdate"    column="creatdate"    />
+        <result property="domain"    column="domain"    />
+        <result property="describe1"    column="describe1"    />
+        <result property="describe2"    column="describe2"    />
+        <result property="describe3"    column="describe3"    />
+        <result property="plazaname"    column="plazaname"    />
+        <result property="zhaoshangst"    column="zhaoshangSt"    />
+        <result property="zhaoshangsj"    column="zhaoshangSj"    />
+        <result property="chutust"    column="chutuSt"    />
+        <result property="chutusj"    column="chutuSj"    />
+        <result property="xiaofangtust"    column="xiaofangtuSt"    />
+        <result property="xiaofangtusj"    column="xiaofangtuSj"    />
+        <result property="xiaofangzichast"    column="xiaofangzichaSt"    />
+        <result property="xiaofangzichasj"    column="xiaofangzichaSj"    />
+        <result property="xiaoyanst"    column="xiaoyanSt"    />
+        <result property="xiaoyansj"    column="xiaoyanSj"    />
+        <result property="kaiyejianst"  column="kaiyejianSt"  />
+        <result property="kaiyejiansj"  column="kaiyejianSj"  />
+    </resultMap>
+
     <sql id="seletmerchantsVo">
         select a.*,b.plazaname from fire_merchant a LEFT JOIN fire_project b ON a.projectid = b._id
     </sql>
 
     <insert id="addmercharts" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireMerchant">
-        insert into fire_merchant (merchantName,type,area,plantime1,plantime2,plantime3,time1,time2,time3,projectid)
-        values  (#{merchantName},#{type},#{area},#{plantime1},#{plantime2},#{plantime3},#{time1},#{time2},#{time3},#{projectid})
+        insert into fire_merchant (merchantName,type,area,plantime1,plantime2,plantime3,time1,time2,time3,projectid,merchanttype)
+        values  (#{merchantName},#{type},#{area},#{plantime1},#{plantime2},#{plantime3},#{time1},#{time2},#{time3},#{projectid},#{merchantType})
     </insert>
 
     <select id="selectmerchantslist" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireMerchant" resultMap="FileMerchant">
@@ -35,6 +59,7 @@
             <if test="merchantName != null">merchantName = #{merchantName}</if>
         <if test="merchantno != null">merchantno = #{merchantno}</if>
         <if test="type != null"> and type = #{type}</if>
+            <if test="merchantType != null"> and merchanttype = #{merchantType}</if>
         <if test="area != null">and area = #{area}</if>
         <if test="plantime1 != null">and plantime1 = #{plantime1}</if>
         <if test="plantime2 != null">and plantime2 = #{plantime2}</if>
@@ -53,8 +78,21 @@
         SELECT _id,plazaname FROM fire_project
     </select>
 
+    <select id="getprojectsListApi" resultMap="project">
+        SELECT _id,plazaname FROM fire_project
+    </select>
+
+
     <select id="getMerchartsByid" resultMap="FileMerchant" parameterType="integer">
         SELECT * FROM fire_merchant where merchantNo = #{id}
+    </select>
+
+    <select id="getprojectsMonthList" resultMap="fireproject">
+        SELECT * FROM fire_project WHERE DATE_FORMAT( creatdate, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+    </select>
+
+    <select id="getprojectListsYearList" resultMap="fireproject">
+        select * from fire_project where YEAR(creatdate)=YEAR(NOW());
     </select>
 
     <select id="getqueryList" parameterType="com.ydcelad.intelligentizecarsystem.entity.FireMerchant" resultMap="FileMerchant">
@@ -73,7 +111,8 @@
             <if test="plantime3 != null"> plantime3 = #{plantime3},</if>
             <if test="time1 != null"> time1 = #{time1},</if>
             <if test="time2 != null"> time2 = #{time2},</if>
-            <if test="time3 != null"> time3 = #{time3}</if>
+            <if test="time3 != null"> time3 = #{time3},</if>
+            <if test="merchantType != null">merchanttype = #{merchantType},</if>
         </set>
         where merchantNo = #{merchantno}
     </update>

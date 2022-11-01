@@ -2,6 +2,7 @@ package com.ydcelad.intelligentizecarsystem.controller;
 
 import com.ydcelad.intelligentizecarsystem.common.Result;
 import com.ydcelad.intelligentizecarsystem.entity.FireMerchant;
+import com.ydcelad.intelligentizecarsystem.entity.FireProject;
 import com.ydcelad.intelligentizecarsystem.service.ImerchantslistInfoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,6 +47,24 @@ public class merchantslistInfo {
     @PostMapping("/getprojectsList")
     public Result getMerchartsList(){
         List<FireMerchant> list = imerchantslistInfoService.getProjectList();
+        return Result.success(list);
+    }
+
+    @PostMapping("/getprojectsListApi")
+    public Result getprojectsListApi(){
+        List<FireProject> list = imerchantslistInfoService.getprojectsListApi();
+        return Result.success(list);
+    }
+
+    @PostMapping("/getprojectsMonthList")
+    public Result getprojectsMonthList(){
+        List<FireProject> list = imerchantslistInfoService.getprojectsMonthList();
+        return Result.success(list);
+    }
+
+    @PostMapping("/getprojectListsYearList")
+    public Result getprojectListsYearList(){
+        List<FireProject> list = imerchantslistInfoService.getprojectListsYearList();
         return Result.success(list);
     }
 

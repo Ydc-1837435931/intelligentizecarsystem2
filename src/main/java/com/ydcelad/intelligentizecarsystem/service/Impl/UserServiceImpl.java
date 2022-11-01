@@ -85,4 +85,9 @@ public class UserServiceImpl  implements UserService {
             throw  new ServiceException(Constants.CODE_600,"用户名或密码异常");
         }
     }
+
+    @Override
+    public FireUser geXcByid(String id) {
+        return userMapper.getXcById(id);
+    }
 }

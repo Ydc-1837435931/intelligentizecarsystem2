@@ -1,5 +1,6 @@
 package com.ydcelad.intelligentizecarsystem.mapper;
 
+import com.ydcelad.intelligentizecarsystem.entity.FireProject;
 import org.apache.ibatis.annotations.Mapper;
 import com.ydcelad.intelligentizecarsystem.entity.FireMerchant;
 
@@ -21,4 +22,10 @@ public interface MerchantslistInfoMappper {
     List<FireMerchant> getqueryList(FireMerchant fireMerchant);
 
     void updateFormSubm(FireMerchant fireMerchant);
+
+    List<FireProject> getprojectsListApi();
+
+    List<FireProject> getprojectsMonthList();
+
+    List<FireProject> getprojectListsYearList();
 }
